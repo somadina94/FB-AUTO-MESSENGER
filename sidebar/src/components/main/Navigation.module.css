@@ -1,0 +1,23 @@
+.nav {
+  max-width: 60rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav a {
+  padding: 2rem;
+  font-size: 1.4rem;
+  text-decoration: none;
+  color: black;
+}
+
+.nav a:hover {
+  background-color: #1971c2;
+  color: #fff;
+}
+
+.nav a.active {
+  background-color: #339af0;
+  color: #fff;
+}
