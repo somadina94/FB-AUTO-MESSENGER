@@ -23,24 +23,19 @@ const Uids = () => {
       .split("\n")
       .filter((line) => line.trim() !== "")
       .map((line) => line.trim());
-    // eslint-disable-next-line no-undef
-    chrome.storage.local.set(
-      {
-        uids: uidsArray,
-      },
-      function () {
-        console.log("Uids uploaded successfully");
-      }
-    );
-    // eslint-disable-next-line no-undef
-    chrome.storage.local.set({ uidsLength: uidsArray.length }, function () {
-      console.log("Uids length uploaded successfully");
-    });
+
+    const data = {
+      uids: uidsArray,
+      uidsLength: uidsArray.length,
+      uidsCounter: 0,
+    };
+
+    const event = new CustomEvent("saveToStorageEvent", { detail: data });
+    window.dispatchEvent(event);
 
     // eslint-disable-next-line no-undef
-    chrome.storage.local.set({ uidsCounter: 0 }, function () {
-      console.log("Uids Counter uploaded successfully");
-    });
+
+    // eslint-disable-next-line no-undef
   };
 
   const uidInputClasses = uidInputIsInvalid

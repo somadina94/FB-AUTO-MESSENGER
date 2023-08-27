@@ -32,19 +32,33 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       console.log("Messenger input box not found");
     }
   }
+  // if (request.action === "saveToStorage") {
+  //   console.log(request.data.uids);
+  //   chrome.storage.local.set({ uids: request.data.uids }, () => {
+  //     console.log("Data saved");
+  //     sendResponse({ message: "data saved successfully" });
+  //   });
+  // }
+  // return true;
+});
+
+window.addEventListener("saveToStorageEvent", function (event) {
+  chrome.storage.local.set({ uids: event.detail.uids }, () => {
+    console.log("Data saved");
+  });
 });
 
 let sidebar = document.createElement("div");
-sidebar.id = "my-extension-sidebar";
+sidebar.id = "sidebar-root";
 document.body.appendChild(sidebar);
 
 // Load your React app's built main.js into the page
 let script = document.createElement("script");
-script.src = chrome.runtime.getURL("ui/static/js/main.fa22f550.js");
+script.src = chrome.runtime.getURL("ui/static/js/main.3ac259bb.js");
 document.body.appendChild(script);
 
 // Optionally, if you want to inject the built CSS
 let link = document.createElement("link");
 link.rel = "stylesheet";
-link.href = chrome.runtime.getURL("ui/static/css/main.57a7264a.css");
+link.href = chrome.runtime.getURL("ui/static/css/main.72bb179c.css");
 document.head.appendChild(link);

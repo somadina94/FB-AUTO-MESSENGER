@@ -3,13 +3,7 @@
   "name": "Message Preparer",
   "version": "1.0",
 
-  "permissions": [
-    "activeTab",
-    "storage",
-    "tabs",
-    "clipboardWrite",
-    "webRequest"
-  ],
+  "permissions": ["activeTab", "tabs", "clipboardWrite", "webRequest"],
   "host_permissions": ["https://*.facebook.com/*"],
 
   "background": {
@@ -19,8 +13,7 @@
   "content_scripts": [
     {
       "matches": ["https://*.facebook.com/*"],
-      "js": ["./content.js", "ui/static/js/main.3ac259bb.js"],
-      "css": ["ui/static/css/main.72bb179c.css"],
+      "js": ["./content.js"],
       "run_at": "document_end"
     }
   ],
@@ -38,15 +31,5 @@
     "16": "logo192.png",
     "48": "logo192.png",
     "128": "logo192.png"
-  },
-
-  "web_accessible_resources": [
-    {
-      "resources": [
-        "ui/static/js/main.3ac259bb.js",
-        "ui/static/css/main.72bb179c.css"
-      ],
-      "matches": ["https://*.facebook.com/*"]
-    }
-  ]
+  }
 }

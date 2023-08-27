@@ -22,7 +22,7 @@ const router = createBrowserRouter(
   )
 );
 
-function App() {
+function SidebarApp() {
   return (
     <Fragment>
       <RouterProvider router={router} />
@@ -30,4 +30,4 @@ function App() {
   );
 }
 
-export default App;
+export default SidebarApp;
