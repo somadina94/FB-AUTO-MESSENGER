@@ -32,7 +32,27 @@ const Messages = () => {
     formIsValid = true;
   }
 
-  const uploadHandler = (e) => {};
+  const uploadHandler = (e) => {
+    e.preventDefault();
+
+    const msgsArray = [message1Input, message2Input, message3Input];
+
+    const msgsCounter = 0;
+
+    // eslint-disable-next-line no-undef
+    chrome.storage.local.set(
+      {
+        messages: msgsArray,
+      },
+      function () {
+        console.log("Message uploaded successfully");
+      }
+    );
+    // eslint-disable-next-line no-undef
+    chrome.storage.local.set({ msgsCounter }, function () {
+      console.log("Messages counter uploaded successfully");
+    });
+  };
 
   const message1InputClasses = message1InputIsInvalid
     ? `${classes.group} ${classes.invalid}`

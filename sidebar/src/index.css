@@ -28,4 +28,9 @@ code {
   height: 60rem;
   background-color: bisque;
   margin: auto;
+  position: fixed;
+  width: 100%;
+  top: 8rem;
+  right: 0;
+  z-index: 100000;
 }

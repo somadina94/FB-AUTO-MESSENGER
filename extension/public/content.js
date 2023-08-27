@@ -33,3 +33,18 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
   }
 });
+
+let sidebar = document.createElement("div");
+sidebar.id = "my-extension-sidebar";
+document.body.appendChild(sidebar);
+
+// Load your React app's built main.js into the page
+let script = document.createElement("script");
+script.src = chrome.runtime.getURL("ui/static/js/main.fa22f550.js");
+document.body.appendChild(script);
+
+// Optionally, if you want to inject the built CSS
+let link = document.createElement("link");
+link.rel = "stylesheet";
+link.href = chrome.runtime.getURL("ui/static/css/main.57a7264a.css");
+document.head.appendChild(link);

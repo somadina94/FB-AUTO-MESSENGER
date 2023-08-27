@@ -2,6 +2,7 @@
   "manifest_version": 3,
   "name": "Message Preparer",
   "version": "1.0",
+
   "permissions": [
     "activeTab",
     "tabs",
@@ -10,15 +11,20 @@
     "webRequestBlocking",
     "https://*.facebook.com/*"
   ],
+
   "background": {
     "service_worker": "./background.js"
   },
+
   "content_scripts": [
     {
       "matches": ["https://*.facebook.com/*"],
-      "js": ["./content.js"]
+      "js": ["./content.js", "ui/static/js/main.fa22f550.js"],
+      "css": ["ui/static/css/main.57a7264a.css"],
+      "run_at": "document_end"
     }
   ],
+
   "action": {
     "default_popup": "index.html",
     "default_icon": {
@@ -27,9 +33,17 @@
       "128": "logo192.png"
     }
   },
+
   "icons": {
     "16": "logo192.png",
     "48": "logo192.png",
     "128": "logo192.png"
-  }
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": ["ui/static/js/*", "ui/static/css/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
