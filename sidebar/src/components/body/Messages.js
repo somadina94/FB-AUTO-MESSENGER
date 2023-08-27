@@ -1,8 +1,10 @@
 import useInput from "../../hooks/userInput";
+import { useNavigate } from "react-router-dom";
 
 import classes from "./Messages.module.css";
 
 const Messages = () => {
+  const navigate = useNavigate();
   const {
     value: message1Input,
     enteredValueIsValid: message1InputIsValid,
@@ -38,20 +40,14 @@ const Messages = () => {
     const msgsArray = [message1Input, message2Input, message3Input];
 
     const msgsCounter = 0;
+    const data = {
+      messages: msgsArray,
+      msgsCounter,
+    };
+    const event = new CustomEvent("saveMessagesEvent", { detail: data });
+    window.dispatchEvent(event);
 
-    // eslint-disable-next-line no-undef
-    chrome.storage.local.set(
-      {
-        messages: msgsArray,
-      },
-      function () {
-        console.log("Message uploaded successfully");
-      }
-    );
-    // eslint-disable-next-line no-undef
-    chrome.storage.local.set({ msgsCounter }, function () {
-      console.log("Messages counter uploaded successfully");
-    });
+    navigate("/uids");
   };
 
   const message1InputClasses = message1InputIsInvalid

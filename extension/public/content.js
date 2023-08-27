@@ -1,12 +1,11 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === "setMessengerText" && request.message) {
+  if (request.action === "time") {
     let inputBox = document.querySelector('[contenteditable="true"]');
     if (inputBox) {
       inputBox.focus();
-
       // Use the InputEvent constructor to set the message
       let inputEvent = new InputEvent("input", {
-        data: request.message,
+        data: request.data,
         inputType: "insertText",
         bubbles: true,
         cancelable: true,
@@ -32,20 +31,32 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       console.log("Messenger input box not found");
     }
   }
-  // if (request.action === "saveToStorage") {
-  //   console.log(request.data.uids);
-  //   chrome.storage.local.set({ uids: request.data.uids }, () => {
-  //     console.log("Data saved");
-  //     sendResponse({ message: "data saved successfully" });
-  //   });
-  // }
-  // return true;
 });
 
-window.addEventListener("saveToStorageEvent", function (event) {
-  chrome.storage.local.set({ uids: event.detail.uids }, () => {
-    console.log("Data saved");
-  });
+window.addEventListener("saveUidsEvent", function (event) {
+  chrome.storage.local.set(
+    {
+      uids: event.detail.uids,
+      uidsCounter: event.detail.uidsCounter,
+      uidsLength: event.detail.uidsLength,
+    },
+    () => {
+      console.log("uids data saved");
+      console.log(event.detail.uids);
+    }
+  );
+});
+
+window.addEventListener("saveMessagesEvent", function (event) {
+  chrome.storage.local.set(
+    {
+      messages: event.detail.messages,
+      messagesCounter: event.detail.msgsCounter,
+    },
+    () => {
+      console.log("Messages data saved");
+    }
+  );
 });
 
 let sidebar = document.createElement("div");
@@ -54,7 +65,7 @@ document.body.appendChild(sidebar);
 
 // Load your React app's built main.js into the page
 let script = document.createElement("script");
-script.src = chrome.runtime.getURL("ui/static/js/main.3ac259bb.js");
+script.src = chrome.runtime.getURL("ui/static/js/main.0c7e3433.js");
 document.body.appendChild(script);
 
 // Optionally, if you want to inject the built CSS
