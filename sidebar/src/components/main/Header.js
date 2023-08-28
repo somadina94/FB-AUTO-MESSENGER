@@ -1,10 +1,10 @@
 import classes from "./Header.module.css";
 import Navigation from "./Navigation";
 
-const Header = () => {
+const Header = (props) => {
   return (
     <header className={classes.header}>
-      <Navigation />
+      <Navigation setNav={props.setNav} />
     </header>
   );
 };

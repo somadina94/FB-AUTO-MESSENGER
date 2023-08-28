@@ -1,28 +1,21 @@
-import { NavLink } from "react-router-dom";
-
 import classes from "./Navigation.module.css";
 
-const Navigation = () => {
+const Navigation = (props) => {
+  const { setNav } = props;
+  const uidsHandler = () => {
+    setNav("uids");
+  };
+  const messagesHandler = () => {
+    setNav("messages");
+  };
+  const readyHandler = () => {
+    setNav("ready");
+  };
   return (
     <nav className={classes.nav}>
-      <NavLink
-        to="/uids"
-        className={(navData) => (navData.isActive ? classes.active : "")}
-      >
-        UIDS
-      </NavLink>
-      <NavLink
-        to="/messages"
-        className={(navData) => (navData.isActive ? classes.active : "")}
-      >
-        MSG'S
-      </NavLink>
-      <NavLink
-        to="/"
-        className={(navData) => (navData.isActive ? classes.active : "")}
-      >
-        +IVE
-      </NavLink>
+      <button onClick={uidsHandler}>UIDS</button>
+      <button onClick={messagesHandler}>MSG'S</button>
+      <button onClick={readyHandler}>+VE</button>
     </nav>
   );
 };

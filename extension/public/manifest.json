@@ -8,7 +8,8 @@
     "storage",
     "tabs",
     "clipboardWrite",
-    "webRequest"
+    "webRequest",
+    "alarms"
   ],
   "host_permissions": ["https://*.facebook.com/*"],
 
@@ -19,8 +20,8 @@
   "content_scripts": [
     {
       "matches": ["https://*.facebook.com/*"],
-      "js": ["./content.js", "ui/static/js/main.36687487.js"],
-      "css": ["ui/static/css/main.572a150a.css"],
+      "js": ["./content.js", "ui/static/js/main.300f0b4a.js"],
+      "css": ["ui/static/css/main.23494c15.css"],
       "run_at": "document_end"
     }
   ],
@@ -43,8 +44,8 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "ui/static/js/main.36687487.js",
-        "ui/static/css/main.572a150a.css"
+        "ui/static/js/main.04c0a2d1.js",
+        "ui/static/css/main.23494c15.css"
       ],
       "matches": ["https://*.facebook.com/*"]
     }

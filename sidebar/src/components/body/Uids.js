@@ -1,10 +1,10 @@
 import useInput from "../../hooks/userInput";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import classes from "./Uids.module.css";
 
 const Uids = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const {
     value: uidInput,
     enteredValueIsValid: uidInputIsValid,
@@ -35,7 +35,7 @@ const Uids = () => {
     const event = new CustomEvent("saveUidsEvent", { detail: data });
     window.dispatchEvent(event);
 
-    navigate("/messages");
+    // navigate("/messages");
     // eslint-disable-next-line no-undef
 
     // eslint-disable-next-line no-undef

@@ -1,3 +1,5 @@
+let interval;
+
 function fetchTabs(queryInfo) {
   return new Promise((resolve, reject) => {
     chrome.tabs.query(queryInfo, (result) => {
@@ -10,7 +12,7 @@ function fetchTabs(queryInfo) {
   });
 }
 
-setInterval(async () => {
+const prepareMessage = async () => {
   // Get data
   const uidsData = await chrome.storage.local.get("uids");
   if (!uidsData.uids) {
@@ -47,27 +49,10 @@ setInterval(async () => {
     setTimeout(() => {
       chrome.tabs.sendMessage(tabId, { action: "time", message, url });
       console.log("Message sent to content");
-    }, 8000);
+    }, 10000);
   } catch (error) {
     console.error("Error fetching active tab", error.message);
   }
-
-  // chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-  //   console.log(tabs[0]);
-  //   const currentTab = tabs[0];
-  //   chrome.tabs.update(currentTab.id, { url: url });
-  //   console.log("ran fist");
-  // });
-
-  // Send message to content script to forward to friend
-  // setTimeout(() => {
-  //   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-  //     console.log(tabs[0].id, "tabs Id");
-  //     const activeTab = tabs[0];
-  //     chrome.tabs.sendMessage(activeTab.id, { action: "time", message, url });
-  //     console.log("ran from messeage sender");
-  //   });
-  // }, 10000);
 
   // Update storage for next message
   if (messagesCounter.messagesCounter === messages.messages.length - 1) {
@@ -78,4 +63,23 @@ setInterval(async () => {
     });
   }
   await chrome.storage.local.set({ uidsCounter: uidsCounter.uidsCounter + 1 });
-}, 40000);
+};
+
+chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+  if (request.action === "start") {
+    console.log("message received in backgound");
+    await prepareMessage();
+
+    chrome.alarms.create("interval", { periodInMinutes: 1 });
+  }
+
+  if (request.action === "pause") {
+    chrome.alarms.clear("interval");
+  }
+});
+
+chrome.alarms.onAlarm.addListener(async (alarm) => {
+  if (alarm.name === "interval") {
+    await prepareMessage();
+  }
+});

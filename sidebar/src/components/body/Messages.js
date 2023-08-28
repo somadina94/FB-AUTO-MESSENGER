@@ -1,10 +1,10 @@
 import useInput from "../../hooks/userInput";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import classes from "./Messages.module.css";
 
 const Messages = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const {
     value: message1Input,
     enteredValueIsValid: message1InputIsValid,
@@ -47,7 +47,7 @@ const Messages = () => {
     const event = new CustomEvent("saveMessagesEvent", { detail: data });
     window.dispatchEvent(event);
 
-    navigate("/uids");
+    // navigate("/ready");
   };
 
   const message1InputClasses = message1InputIsInvalid

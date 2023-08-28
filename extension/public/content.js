@@ -1,3 +1,13 @@
+window.addEventListener("start", async (event) => {
+  console.log("Recieved message to start");
+
+  chrome.runtime.sendMessage({ action: "start" }, (response) => {});
+});
+
+window.addEventListener("pause", async (event) => {
+  chrome.runtime.sendMessage({ action: "pause" }, (response) => {});
+});
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "time") {
     let inputBox = document.querySelector('[contenteditable="true"]');
@@ -65,11 +75,11 @@ document.body.appendChild(sidebar);
 
 // Load your React app's built main.js into the page
 let script = document.createElement("script");
-script.src = chrome.runtime.getURL("ui/static/js/main.36687487.js");
+script.src = chrome.runtime.getURL("ui/static/js/main.300f0b4a.js");
 document.body.appendChild(script);
 
 // Optionally, if you want to inject the built CSS
 let link = document.createElement("link");
 link.rel = "stylesheet";
-link.href = chrome.runtime.getURL("ui/static/css/main.572a150a.css");
+link.href = chrome.runtime.getURL("ui/static/css/main.23494c15.css");
 document.head.appendChild(link);

@@ -5,19 +5,16 @@
   align-items: center;
 }
 
-.nav a {
-  padding: 2rem;
+.nav button {
+  padding: 1rem;
   font-size: 1.4rem;
-  text-decoration: none;
-  color: black;
-}
-
-.nav a:hover {
-  background-color: #1971c2;
   color: #fff;
+  background-color: #1971c2;
+  border: none;
+  cursor: pointer;
 }
 
-.nav a.active {
-  background-color: #339af0;
+.nav button:hover {
+  background-color: #1864ab;
   color: #fff;
 }
