@@ -1,10 +1,10 @@
 import useInput from "../../hooks/userInput";
-// import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 import classes from "./Messages.module.css";
 
 const Messages = () => {
-  // const navigate = useNavigate();
+  const [sent, setSent] = useState(false);
   const {
     value: message1Input,
     enteredValueIsValid: message1InputIsValid,
@@ -47,8 +47,10 @@ const Messages = () => {
     const event = new CustomEvent("saveMessagesEvent", { detail: data });
     window.dispatchEvent(event);
 
-    // navigate("/ready");
+    setSent(true);
   };
+
+  const upload = sent ? "Uploaded" : "Upload";
 
   const message1InputClasses = message1InputIsInvalid
     ? `${classes.group} ${classes.invalid}`
@@ -89,8 +91,8 @@ const Messages = () => {
         />
       </div>
       <div className={classes.action}>
-        <button type="submit" disabled={!formIsValid}>
-          Uplaod
+        <button type="submit" disabled={!formIsValid || sent}>
+          {upload}
         </button>
       </div>
     </form>

@@ -1,5 +1,3 @@
-let interval;
-
 function fetchTabs(queryInfo) {
   return new Promise((resolve, reject) => {
     chrome.tabs.query(queryInfo, (result) => {
@@ -32,6 +30,7 @@ const prepareMessage = async () => {
   const url = `https://www.facebook.com/messages/t/${uid}`;
 
   if (uidsCounter.uidsCounter >= limit) {
+    chrome.alarms.clear("interval");
     return;
   }
 
@@ -48,7 +47,6 @@ const prepareMessage = async () => {
     chrome.tabs.update(tabId, { url: url });
     setTimeout(() => {
       chrome.tabs.sendMessage(tabId, { action: "time", message, url });
-      console.log("Message sent to content");
     }, 10000);
   } catch (error) {
     console.error("Error fetching active tab", error.message);
@@ -67,10 +65,9 @@ const prepareMessage = async () => {
 
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
   if (request.action === "start") {
-    console.log("message received in backgound");
     await prepareMessage();
 
-    chrome.alarms.create("interval", { periodInMinutes: 1 });
+    chrome.alarms.create("interval", { periodInMinutes: 20 });
   }
 
   if (request.action === "pause") {

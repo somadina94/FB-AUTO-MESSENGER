@@ -1,6 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Message Preparer",
+  "name": "Bagwell's FB Auto message sender",
+  "description": "Extention to auto send messages on FB",
   "version": "1.0",
 
   "permissions": [
@@ -20,8 +21,8 @@
   "content_scripts": [
     {
       "matches": ["https://*.facebook.com/*"],
-      "js": ["./content.js", "ui/static/js/main.300f0b4a.js"],
-      "css": ["ui/static/css/main.23494c15.css"],
+      "js": ["./content.js", "ui/static/js/main.47e52c8a.js"],
+      "css": ["ui/static/css/main.0803d0bb.css"],
       "run_at": "document_end"
     }
   ],
@@ -44,8 +45,8 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "ui/static/js/main.04c0a2d1.js",
-        "ui/static/css/main.23494c15.css"
+        "ui/static/js/main.47e52c8a.js",
+        "ui/static/css/main.0803d0bb.css"
       ],
       "matches": ["https://*.facebook.com/*"]
     }

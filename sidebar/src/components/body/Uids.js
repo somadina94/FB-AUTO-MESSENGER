@@ -1,10 +1,10 @@
 import useInput from "../../hooks/userInput";
-// import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 import classes from "./Uids.module.css";
 
 const Uids = () => {
-  // const navigate = useNavigate();
+  const [sent, setSent] = useState(false);
   const {
     value: uidInput,
     enteredValueIsValid: uidInputIsValid,
@@ -35,11 +35,10 @@ const Uids = () => {
     const event = new CustomEvent("saveUidsEvent", { detail: data });
     window.dispatchEvent(event);
 
-    // navigate("/messages");
-    // eslint-disable-next-line no-undef
-
-    // eslint-disable-next-line no-undef
+    setSent(true);
   };
+
+  const upload = sent ? "Uploaded" : "Upload";
 
   const uidInputClasses = uidInputIsInvalid
     ? `${classes.group} ${classes.invalid}`
@@ -55,8 +54,8 @@ const Uids = () => {
         />
       </div>
       <div className={classes.action}>
-        <button type="submit" disabled={!formIsValid}>
-          Upload
+        <button type="submit" disabled={!formIsValid || sent}>
+          {upload}
         </button>
       </div>
     </form>

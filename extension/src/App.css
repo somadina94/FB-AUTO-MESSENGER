@@ -1,6 +1,9 @@
-.App {
+.title {
+  background-color: purple;
+  max-width: 30rem;
   text-align: center;
-  width: 50rem;
-  height: 40rem;
-  background-color: aqua;
+  color: #fff;
+  border: 4px solid black;
+  border-radius: 8px;
+  padding: 2rem;
 }

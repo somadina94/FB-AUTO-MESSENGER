@@ -4,6 +4,7 @@ import classes from "./Ready.module.css";
 
 const Ready = () => {
   const [start, setStart] = useState(false);
+  const [pause, setPause] = useState(false);
 
   const startHandler = () => {
     const event = new CustomEvent("start", { detail: "start" });
@@ -14,20 +15,29 @@ const Ready = () => {
   const pauseHandler = () => {
     const event = new CustomEvent("pause", { detail: "pause" });
     window.dispatchEvent(event);
-    setStart(false);
+    setPause(true);
   };
 
-  const message = start ? "Running" : "Ready";
+  const startBtn = start ? "Started" : "Start";
+  const pauseBtn = pause ? "Paused" : "Pause";
 
   return (
     <div className={classes.ready}>
-      <h2>{message}</h2>
+      <p>
+        Remeber when the page reloads, Buttons return to their Initial state and
+        this doesn't mean work is not in progress. Always check last message
+        time to confirm work is still in progress
+      </p>
+      <p>
+        Remember to first use the UIDS and MSG'S tabs to upload UIDS and
+        MESSAGES before clicking start
+      </p>
       <div className={classes.action}>
-        <button type="button" onClick={startHandler}>
-          Start
+        <button type="button" disabled={start} onClick={startHandler}>
+          {startBtn}
         </button>
-        <button type="button" onClick={pauseHandler}>
-          Pause
+        <button type="button" disabled={pause} onClick={pauseHandler}>
+          {pauseBtn}
         </button>
       </div>
     </div>
