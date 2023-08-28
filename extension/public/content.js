@@ -65,11 +65,11 @@ document.body.appendChild(sidebar);
 
 // Load your React app's built main.js into the page
 let script = document.createElement("script");
-script.src = chrome.runtime.getURL("ui/static/js/main.0c7e3433.js");
+script.src = chrome.runtime.getURL("ui/static/js/main.36687487.js");
 document.body.appendChild(script);
 
 // Optionally, if you want to inject the built CSS
 let link = document.createElement("link");
 link.rel = "stylesheet";
-link.href = chrome.runtime.getURL("ui/static/css/main.72bb179c.css");
+link.href = chrome.runtime.getURL("ui/static/css/main.572a150a.css");
 document.head.appendChild(link);

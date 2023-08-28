@@ -19,8 +19,8 @@
   "content_scripts": [
     {
       "matches": ["https://*.facebook.com/*"],
-      "js": ["./content.js", "ui/static/js/main.0c7e3433.js"],
-      "css": ["ui/static/css/main.72bb179c.css"],
+      "js": ["./content.js", "ui/static/js/main.36687487.js"],
+      "css": ["ui/static/css/main.572a150a.css"],
       "run_at": "document_end"
     }
   ],
@@ -43,8 +43,8 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "ui/static/js/main.0c7e3433.js",
-        "ui/static/css/main.72bb179c.css"
+        "ui/static/js/main.36687487.js",
+        "ui/static/css/main.572a150a.css"
       ],
       "matches": ["https://*.facebook.com/*"]
     }
