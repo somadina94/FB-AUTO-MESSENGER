@@ -5,7 +5,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       inputBox.focus();
       // Use the InputEvent constructor to set the message
       let inputEvent = new InputEvent("input", {
-        data: request.data,
+        data: request.message,
         inputType: "insertText",
         bubbles: true,
         cancelable: true,

@@ -1,3 +1,15 @@
+function fetchTabs(queryInfo) {
+  return new Promise((resolve, reject) => {
+    chrome.tabs.query(queryInfo, (result) => {
+      if (chrome.runtime.lastError) {
+        reject(new Error(chrome.runtime.lastError));
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
+
 setInterval(async () => {
   // Get data
   const uidsData = await chrome.storage.local.get("uids");
@@ -22,22 +34,40 @@ setInterval(async () => {
   }
 
   // Load url for next message to page url bar
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    console.log(tabs[0]);
-    const currentTab = tabs[0];
-    chrome.tabs.update(currentTab.id, { url: url });
-    console.log("ran fist");
-  });
+  try {
+    const tabs = await fetchTabs({ active: true, currentWindow: true });
+
+    if (tabs.length === 0) {
+      console.log("No active tabs found");
+      return;
+    }
+    const activeTab = tabs[0];
+    const tabId = activeTab.id;
+    chrome.tabs.update(tabId, { url: url });
+    setTimeout(() => {
+      chrome.tabs.sendMessage(tabId, { action: "time", message, url });
+      console.log("Message sent to content");
+    }, 8000);
+  } catch (error) {
+    console.error("Error fetching active tab", error.message);
+  }
+
+  // chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+  //   console.log(tabs[0]);
+  //   const currentTab = tabs[0];
+  //   chrome.tabs.update(currentTab.id, { url: url });
+  //   console.log("ran fist");
+  // });
 
   // Send message to content script to forward to friend
-  setTimeout(() => {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      console.log(tabs[0].id, "tabs Id");
-      const activeTab = tabs[0];
-      chrome.tabs.sendMessage(activeTab.id, { action: "time", message, url });
-      console.log("ran from messeage sender");
-    });
-  }, 10000);
+  // setTimeout(() => {
+  //   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+  //     console.log(tabs[0].id, "tabs Id");
+  //     const activeTab = tabs[0];
+  //     chrome.tabs.sendMessage(activeTab.id, { action: "time", message, url });
+  //     console.log("ran from messeage sender");
+  //   });
+  // }, 10000);
 
   // Update storage for next message
   if (messagesCounter.messagesCounter === messages.messages.length - 1) {
@@ -48,4 +78,4 @@ setInterval(async () => {
     });
   }
   await chrome.storage.local.set({ uidsCounter: uidsCounter.uidsCounter + 1 });
-}, 30000);
+}, 40000);
