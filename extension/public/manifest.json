@@ -21,7 +21,7 @@
   "content_scripts": [
     {
       "matches": ["https://*.facebook.com/*"],
-      "js": ["./content.js", "ui/static/js/main.47e52c8a.js"],
+      "js": ["./content.js", "ui/static/js/main.f087a03f.js"],
       "css": ["ui/static/css/main.0803d0bb.css"],
       "run_at": "document_end"
     }
@@ -45,7 +45,7 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "ui/static/js/main.47e52c8a.js",
+        "ui/static/js/main.f087a03f.js",
         "ui/static/css/main.0803d0bb.css"
       ],
       "matches": ["https://*.facebook.com/*"]

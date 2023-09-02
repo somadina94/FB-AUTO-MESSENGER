@@ -9,6 +9,12 @@ window.addEventListener("pause", async (event) => {
 });
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === "checkInput") {
+    const inputBox = document.querySelector('[contenteditable="true"]');
+    if (inputBox) {
+      sendResponse({ status: "found" });
+    }
+  }
   if (request.action === "time") {
     let inputBox = document.querySelector('[contenteditable="true"]');
     if (inputBox) {
@@ -37,6 +43,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         });
         inputBox.dispatchEvent(enterKeyEvent);
       }, 2000); // Adjust the delay as needed
+
+      // Send update to sidebar ui
+      const event = new CustomEvent("count", { detail: request.count });
+      window.dispatchEvent(event);
     } else {
       console.log("Messenger input box not found");
     }
@@ -75,7 +85,7 @@ document.body.appendChild(sidebar);
 
 // Load your React app's built main.js into the page
 let script = document.createElement("script");
-script.src = chrome.runtime.getURL("ui/static/js/main.47e52c8a.js");
+script.src = chrome.runtime.getURL("ui/static/js/main.f087a03f.js");
 document.body.appendChild(script);
 
 // Optionally, if you want to inject the built CSS

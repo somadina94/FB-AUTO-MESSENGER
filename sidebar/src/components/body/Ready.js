@@ -5,6 +5,7 @@ import classes from "./Ready.module.css";
 const Ready = () => {
   const [start, setStart] = useState(false);
   const [pause, setPause] = useState(false);
+  const [count, setCount] = useState(0);
 
   const startHandler = () => {
     const event = new CustomEvent("start", { detail: "start" });
@@ -18,11 +19,16 @@ const Ready = () => {
     setPause(true);
   };
 
+  window.addEventListener("count", async (event) => {
+    setCount(event.detail);
+  });
+
   const startBtn = start ? "Started" : "Start";
   const pauseBtn = pause ? "Paused" : "Pause";
 
   return (
     <div className={classes.ready}>
+      <p>Count = {count}</p>
       <p>
         Remeber when the page reloads, Buttons return to their Initial state and
         this doesn't mean work is not in progress. Always check last message
