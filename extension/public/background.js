@@ -73,6 +73,10 @@ const prepareMessage = async () => {
                 // Check if its the last uid and clear interval
                 if (uidsCounter.uidsCounter >= limit - 1) {
                   chrome.alarms.clear("interval");
+                  chrome.tabs.sendMessage(tabId, {
+                    action: "ended",
+                    count: `Finished @${uidsCounter.uidsCounter + 1}`,
+                  });
                 }
 
                 // Update storage for next message

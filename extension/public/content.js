@@ -9,6 +9,10 @@ window.addEventListener("pause", async (event) => {
 });
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === "ended") {
+    const event = new CustomEvent("count", { detail: request.count });
+    window.dispatchEvent(event);
+  }
   if (request.action === "checkInput") {
     const inputBox = document.querySelector('[contenteditable="true"]');
     if (inputBox) {
