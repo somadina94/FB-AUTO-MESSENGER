@@ -70,6 +70,11 @@ const prepareMessage = async () => {
                 // Stop alarm
                 chrome.alarms.clear("checkInputAlarm");
 
+                // Check if its the last uid and clear interval
+                if (uidsCounter.uidsCounter >= limit - 1) {
+                  chrome.alarms.clear("interval");
+                }
+
                 // Update storage for next message
                 if (
                   messagesCounter.messagesCounter ===
