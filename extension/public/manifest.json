@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Bagwell's FB Auto message sender",
   "description": "Extention to auto send messages on FB",
-  "version": "1.0",
+  "version": "1.0.1",
 
   "permissions": [
     "activeTab",
@@ -12,17 +12,20 @@
     "webRequest",
     "alarms"
   ],
-  "host_permissions": ["https://*.facebook.com/*"],
+  "host_permissions": [
+    "https://*.facebook.com/*",
+    "https://api.socialwarlock.com/*"
+  ],
 
   "background": {
-    "service_worker": "./background.js"
+    "service_worker": "./background.min.js"
   },
 
   "content_scripts": [
     {
       "matches": ["https://*.facebook.com/*"],
-      "js": ["./content.js", "ui/static/js/main.f087a03f.js"],
-      "css": ["ui/static/css/main.0803d0bb.css"],
+      "js": ["./content.min.js", "ui/static/js/main.ac6f0859.js"],
+      "css": ["ui/static/css/main.a2fe89e6.css"],
       "run_at": "document_end"
     }
   ],
@@ -45,8 +48,9 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "ui/static/js/main.f087a03f.js",
-        "ui/static/css/main.0803d0bb.css"
+        "ui/static/js/main.ac6f0859.js",
+        "ui/static/css/main.a2fe89e6.css",
+        "ui/static/media/moon.7c71b562e0fbc29247d3.jpg"
       ],
       "matches": ["https://*.facebook.com/*"]
     }

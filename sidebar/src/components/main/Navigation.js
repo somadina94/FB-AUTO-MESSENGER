@@ -8,6 +8,9 @@ const Navigation = (props) => {
   const messagesHandler = () => {
     setNav("messages");
   };
+  const keyHandler = () => {
+    setNav("key");
+  };
   const readyHandler = () => {
     setNav("ready");
   };
@@ -15,6 +18,7 @@ const Navigation = (props) => {
     <nav className={classes.nav}>
       <button onClick={uidsHandler}>UIDS</button>
       <button onClick={messagesHandler}>MSG'S</button>
+      <button onClick={keyHandler}>KEY</button>
       <button onClick={readyHandler}>+VE</button>
     </nav>
   );

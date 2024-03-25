@@ -1,0 +1,57 @@
+.form {
+  padding: 2rem;
+  margin-top: 8rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 3px solid blue;
+}
+
+.group {
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.group label {
+  color: #fff;
+  font-size: 2rem;
+}
+
+.group input {
+  height: 3.8rem;
+  background-color: transparent;
+  border: 1px solid blue;
+  border-radius: 8px;
+  outline: none;
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+.action {
+  display: flex;
+  justify-content: center;
+}
+
+.action button {
+  font-size: 1.8rem;
+  color: #fff;
+  background-color: blue;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 500ms;
+}
+
+.action button:hover {
+  transform: scale(1.1);
+}
+
+button:disabled,
+button:disabled:hover,
+button:disabled:active {
+  background-color: #ccc;
+  color: #292929;
+  border-color: #ccc;
+  cursor: not-allowed;
+}

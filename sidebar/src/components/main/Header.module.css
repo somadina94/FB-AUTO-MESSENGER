@@ -2,6 +2,6 @@
   max-width: 60rem;
   margin: auto;
   margin-bottom: 4rem;
-  background-color: #fff;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  border-bottom: 3px solid blue;
 }

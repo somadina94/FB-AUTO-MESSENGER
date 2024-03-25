@@ -8,13 +8,13 @@
 .nav button {
   padding: 1rem;
   font-size: 1.4rem;
-  color: #fff;
-  background-color: #1971c2;
+  color: blue;
+  background-color: rgba(0, 0, 0, 0.2);
   border: none;
   cursor: pointer;
 }
 
 .nav button:hover {
-  background-color: #1864ab;
+  background-color: blue;
   color: #fff;
 }

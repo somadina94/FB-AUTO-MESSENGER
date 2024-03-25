@@ -1,10 +1,12 @@
 import useInput from "../../hooks/userInput";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import classes from "./Uids.module.css";
 
 const Uids = () => {
   const [sent, setSent] = useState(false);
+  const [_, forceUpdate] = useState();
+  const uploadedValue = useRef("");
   const {
     value: uidInput,
     enteredValueIsValid: uidInputIsValid,
@@ -17,6 +19,23 @@ const Uids = () => {
   if (uidInputIsValid) {
     formIsValid = true;
   }
+
+  useEffect(() => {
+    const handelCustomEvent = (event) => {
+      uploadedValue.current =
+        event.detail && event.detail.length > 0 ? event.detail.join("\n") : "";
+      forceUpdate(Math.random());
+    };
+
+    window.addEventListener("uploadedUids", handelCustomEvent);
+
+    const event = new CustomEvent("sendUidsEvent");
+    window.dispatchEvent(event);
+
+    return () => {
+      window.removeEventListener("uploadedUids", handelCustomEvent);
+    };
+  }, []);
 
   const uploadHandler = (e) => {
     e.preventDefault();
@@ -48,7 +67,10 @@ const Uids = () => {
       <h2>Copy and paste UID'S line by line</h2>
       <div className={uidInputClasses}>
         <textarea
-          value={uidInput}
+          placeholder={
+            uploadedValue.current === "" ? "No uids uploaded yet" : ""
+          }
+          value={uidInput || uploadedValue.current}
           onChange={uidInputChangedHandler}
           onBlur={uidInputBlurHandler}
         />
